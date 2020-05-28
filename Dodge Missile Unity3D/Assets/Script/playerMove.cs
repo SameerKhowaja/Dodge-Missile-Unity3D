@@ -6,6 +6,7 @@ public class playerMove : MonoBehaviour
 {
     public Rigidbody rb;
     public Transform tf;
+	
     public MeshRenderer m1, m2;
     public enemyFall_Rng1 e1;
     public enemyFall_Rng2 e2;
@@ -13,24 +14,29 @@ public class playerMove : MonoBehaviour
     public Score sc;
     public playerMove pm;
     public AudioSource asd, back;
+
     float xRot = 0;
     float speed = 250;
+    float XPosInput;
 
     void FixedUpdate()
     {
+        XPosInput = SimpleInput.GetAxis("Horizontal");
 
-        if (Input.GetKey("a") || Input.GetKey("left"))
+        //Keyboard
+        if (XPosInput < 0)
         {
-            xRot -= 160;
+            xRot -= 1500;
             rb.velocity = new Vector3(0f, 0f, -speed * Time.deltaTime);
             tf.rotation = Quaternion.Euler(xRot * Time.deltaTime, 0f, 0f);
         }
-        if (Input.GetKey("d") || Input.GetKey("right"))
+        if (XPosInput > 0)
         {
-            xRot += 160;
+            xRot += 1500;
             rb.velocity = new Vector3(0f, 0f, speed * Time.deltaTime);
             tf.rotation = Quaternion.Euler(xRot * Time.deltaTime, 0f, 0f);
         }
+        
     }
 
     private void OnCollisionEnter(Collision collision)

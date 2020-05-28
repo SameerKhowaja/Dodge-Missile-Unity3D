@@ -13,13 +13,16 @@ public class Restart : MonoBehaviour
     {
        st = TScore.text;
        TScore.text = st;
-        Msg.text = "Press Spacebar to Restart";
+       Msg.text = "Press to Restart";
     }
 
     void Update()
     {
-        if (Input.GetKeyDown("space"))
-            Invoke("Restarter", 0.5f);
+        if (Input.anyKey)
+        {
+            Msg.text = "Restarting...!";
+            Invoke("Restarter", 1f);
+        }
     }
 
     void Restarter()
